@@ -4,7 +4,12 @@ import { getWhatsAppUrl } from '../utils/whatsapp';
 import { trackAdConversion } from '../utils/analytics';
 
 export const LegalDiagnosticTool: React.FC = () => {
-  const [category, setCategory] = useState<'inventario' | 'divorcio' | 'tea'>('inventario');
+  const [category, setCategory] = useState<'pensao' | 'inventario' | 'divorcio' | 'tea'>('pensao');
+
+  // Pensao state
+  const [objetivoPensao, setObjetivoPensao] = useState<'fixar' | 'cobrar' | 'revisar'>('fixar');
+  const [pensaoTipoDevedor, setPensaoTipoDevedor] = useState<'clt' | 'autonomo' | 'desempregado'>('clt');
+  const [pensaoTemAcordo, setPensaoTemAcordo] = useState<boolean>(false);
   
   // Inventario state
   const [herdeirosAcordo, setHerdeirosAcordo] = useState<boolean | null>(true);
@@ -24,7 +29,42 @@ export const LegalDiagnosticTool: React.FC = () => {
   const [diagnosticResult, setDiagnosticResult] = useState<any | null>(null);
 
   const calculateDiagnosis = () => {
-    if (category === 'inventario') {
+    if (category === 'pensao') {
+      const isExecucao = objetivoPensao === 'cobrar';
+      const isRevisao = objetivoPensao === 'revisar';
+      setDiagnosticResult({
+        category: 'Pensão Alimentícia',
+        route: isExecucao
+          ? 'Execução de Alimentos sob Rito de Prisão (Art. 528 CPC) ou Penhora'
+          : isRevisao
+          ? 'Ação Revisional de Alimentos (Binômio Necessidade x Possibilidade)'
+          : 'Ação de Alimentos com Pedido Liminar de Alimentos Provisórios',
+        badge: isExecucao ? 'Cobrança Coercitiva Imediata' : isRevisao ? 'Readequação Justa' : 'Tutela de Urgência Protetiva',
+        urgency: isExecucao
+          ? 'Intimação para pagar em 3 dias sob pena de prisão civil'
+          : 'Liminar de alimentos provisórios apreciada em 48 a 72 horas pelo juiz em Caxias do Sul',
+        recommendations: isExecucao
+          ? [
+              'Cobrança imediata das 3 últimas parcelas vencidas sob pena de prisão civil em regime fechado.',
+              'Bloqueio de contas bancárias (SISBAJUD), veículos (RENAJUD) e retenção de restituição do IRPF.',
+              'Suspensão de CNH e retenção de passaporte caso haja tentativa de ocultação de patrimônio.'
+            ]
+          : isRevisao
+          ? [
+              'Comprovação contundente da mudança na capacidade financeira ou novas despesas médicas/escolares.',
+              'Planilha pormenorizada de despesas reais do filho dependente.',
+              'Demonstração da divisão equilibrada e proporcional entre pai e mãe.'
+            ]
+          : [
+              'Fixação célere de alimentos provisórios antes mesmo da primeira audiência.',
+              pensaoTipoDevedor === 'clt'
+                ? 'Expedição de ofício para desconto direto em folha de pagamento (salário, 13º e férias).'
+                : 'Aplicação da Teoria da Aparência para investigar renda informal através de sinais exteriores de riqueza.',
+              'Homologação de conta bancária para crédito seguro dos depósitos mensais.'
+            ],
+        whatsappMessage: `Olá, Dra. Letícia! Fiz o diagnóstico no site para Pensão Alimentícia (${isExecucao ? 'Cobrança de parcelas em atraso' : isRevisao ? 'Revisão do valor' : 'Fixação pela primeira vez'}). Gostaria de orientação jurídica.`
+      });
+    } else if (category === 'inventario') {
       const isCartorio = herdeirosAcordo && !temMenores && !temTestamento;
       setDiagnosticResult({
         category: 'Inventário e Partilha',
@@ -122,17 +162,17 @@ export const LegalDiagnosticTool: React.FC = () => {
                 <label className="block text-xs uppercase font-semibold text-neutral-700 tracking-wider mb-3">
                   Passo 1: Qual é o tema da sua necessidade jurídica?
                 </label>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   <button
                     type="button"
-                    onClick={() => setCategory('inventario')}
+                    onClick={() => setCategory('pensao')}
                     className={`py-3 px-4 text-xs font-semibold uppercase tracking-wider rounded-lg border transition-all text-center ${
-                      category === 'inventario'
-                        ? 'bg-[#111827] text-white border-[#C5A059] shadow-md'
+                      category === 'pensao'
+                        ? 'bg-[#111827] text-white border-[#C5A059] shadow-md ring-1 ring-[#C5A059]'
                         : 'bg-white text-neutral-700 border-neutral-200 hover:border-neutral-300'
                     }`}
                   >
-                    Inventário & Herança
+                    Pensão Alimentícia
                   </button>
 
                   <button
@@ -140,7 +180,7 @@ export const LegalDiagnosticTool: React.FC = () => {
                     onClick={() => setCategory('divorcio')}
                     className={`py-3 px-4 text-xs font-semibold uppercase tracking-wider rounded-lg border transition-all text-center ${
                       category === 'divorcio'
-                        ? 'bg-[#111827] text-white border-[#C5A059] shadow-md'
+                        ? 'bg-[#111827] text-white border-[#C5A059] shadow-md ring-1 ring-[#C5A059]'
                         : 'bg-white text-neutral-700 border-neutral-200 hover:border-neutral-300'
                     }`}
                   >
@@ -149,14 +189,26 @@ export const LegalDiagnosticTool: React.FC = () => {
 
                   <button
                     type="button"
-                    onClick={() => setCategory('tea')}
+                    onClick={() => setCategory('inventario')}
                     className={`py-3 px-4 text-xs font-semibold uppercase tracking-wider rounded-lg border transition-all text-center ${
-                      category === 'tea'
-                        ? 'bg-[#111827] text-white border-[#C5A059] shadow-md'
+                      category === 'inventario'
+                        ? 'bg-[#111827] text-white border-[#C5A059] shadow-md ring-1 ring-[#C5A059]'
                         : 'bg-white text-neutral-700 border-neutral-200 hover:border-neutral-300'
                     }`}
                   >
-                    Direitos TEA (Autismo) / Saúde
+                    Inventário & Herança
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setCategory('tea')}
+                    className={`py-3 px-4 text-xs font-semibold uppercase tracking-wider rounded-lg border transition-all text-center ${
+                      category === 'tea'
+                        ? 'bg-[#111827] text-white border-[#C5A059] shadow-md ring-1 ring-[#C5A059]'
+                        : 'bg-white text-neutral-700 border-neutral-200 hover:border-neutral-300'
+                    }`}
+                  >
+                    Direitos TEA / Saúde
                   </button>
                 </div>
               </div>
@@ -166,6 +218,106 @@ export const LegalDiagnosticTool: React.FC = () => {
                 <label className="block text-xs uppercase font-semibold text-neutral-700 tracking-wider mb-2">
                   Passo 2: Informações essenciais sobre o cenário
                 </label>
+
+                {category === 'pensao' && (
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <div className="bg-white p-4 rounded-lg border border-neutral-200">
+                      <p className="text-xs font-medium text-neutral-800 mb-2">
+                        Qual é o seu objetivo principal?
+                      </p>
+                      <div className="flex flex-col gap-1.5">
+                        <button
+                          type="button"
+                          onClick={() => setObjetivoPensao('fixar')}
+                          className={`py-1.5 px-2 text-xs font-medium rounded text-left ${
+                            objetivoPensao === 'fixar' ? 'bg-[#111827] text-white' : 'bg-neutral-100 text-neutral-700'
+                          }`}
+                        >
+                          Fixar pensão (1ª vez)
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setObjetivoPensao('cobrar')}
+                          className={`py-1.5 px-2 text-xs font-medium rounded text-left ${
+                            objetivoPensao === 'cobrar' ? 'bg-[#111827] text-white' : 'bg-neutral-100 text-neutral-700'
+                          }`}
+                        >
+                          Cobrar atrasados (Execução)
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setObjetivoPensao('revisar')}
+                          className={`py-1.5 px-2 text-xs font-medium rounded text-left ${
+                            objetivoPensao === 'revisar' ? 'bg-[#111827] text-white' : 'bg-neutral-100 text-neutral-700'
+                          }`}
+                        >
+                          Revisar valor (Aumentar/Reduzir)
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="bg-white p-4 rounded-lg border border-neutral-200">
+                      <p className="text-xs font-medium text-neutral-800 mb-2">
+                        Situação profissional do pagador:
+                      </p>
+                      <div className="flex flex-col gap-1.5">
+                        <button
+                          type="button"
+                          onClick={() => setPensaoTipoDevedor('clt')}
+                          className={`py-1.5 px-2 text-xs font-medium rounded text-left ${
+                            pensaoTipoDevedor === 'clt' ? 'bg-[#111827] text-white' : 'bg-neutral-100 text-neutral-700'
+                          }`}
+                        >
+                          CLT / Servidor Público
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setPensaoTipoDevedor('autonomo')}
+                          className={`py-1.5 px-2 text-xs font-medium rounded text-left ${
+                            pensaoTipoDevedor === 'autonomo' ? 'bg-[#111827] text-white' : 'bg-neutral-100 text-neutral-700'
+                          }`}
+                        >
+                          Autônomo / Empresário / Informal
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setPensaoTipoDevedor('desempregado')}
+                          className={`py-1.5 px-2 text-xs font-medium rounded text-left ${
+                            pensaoTipoDevedor === 'desempregado' ? 'bg-[#111827] text-white' : 'bg-neutral-100 text-neutral-700'
+                          }`}
+                        >
+                          Desempregado atualmente
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="bg-white p-4 rounded-lg border border-neutral-200">
+                      <p className="text-xs font-medium text-neutral-800 mb-2">
+                        Já existe decisão ou acordo judicial anterior?
+                      </p>
+                      <div className="flex gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setPensaoTemAcordo(true)}
+                          className={`flex-1 py-1.5 text-xs font-medium rounded ${
+                            pensaoTemAcordo === true ? 'bg-[#111827] text-white' : 'bg-neutral-100 text-neutral-700'
+                          }`}
+                        >
+                          Sim, homologado
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setPensaoTemAcordo(false)}
+                          className={`flex-1 py-1.5 text-xs font-medium rounded ${
+                            pensaoTemAcordo === false ? 'bg-[#111827] text-white' : 'bg-neutral-100 text-neutral-700'
+                          }`}
+                        >
+                          Não / Apenas verbal
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {category === 'inventario' && (
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">

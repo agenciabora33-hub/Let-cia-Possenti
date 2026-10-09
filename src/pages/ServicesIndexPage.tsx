@@ -1,18 +1,25 @@
 import React from 'react';
 import { servicesData } from '../data/servicesData';
-import { ArrowRight, Check, Scale, FileText, HeartHandshake, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Check, Scale, FileText, HeartHandshake, ShieldCheck, Coins } from 'lucide-react';
 import { getWhatsAppUrl, getServiceWhatsAppUrl } from '../utils/whatsapp';
 
 import divorcioImg from '../assets/images/divorcio_partilha_bens_1791555645234.jpg';
 import sucessoesImg from '../assets/images/sucessoes_patrimonio_1791386831317.jpg';
 import guardaImg from '../assets/images/guarda_infancia_protegida_1791555656534.jpg';
 import teaImg from '../assets/images/family_care_specialized_1791386814944.jpg';
+import pensaoImg from '../assets/images/pensao_alimenticia_apoio_1791579205311.jpg';
 
 const SERVICE_INDEX_VISUALS: Record<string, { src: string; fallback: string; alt: string; tag: string }> = {
   'divorcio-e-partilha': {
     src: divorcioImg,
     fallback: '/images/divorcio_partilha_bens_1791555645234.jpg',
     alt: 'Divórcio consensual e partilha estratégica de patrimônio matrimonial',
+    tag: 'Direito de Família'
+  },
+  'pensao-alimenticia': {
+    src: pensaoImg,
+    fallback: '/images/pensao_alimenticia_apoio_1791579205311.jpg',
+    alt: 'Pensão alimentícia, fixação e cobrança sob rito de prisão ou penhora em Caxias do Sul',
     tag: 'Direito de Família'
   },
   'inventario-e-sucessoes': {
@@ -48,6 +55,8 @@ export const ServicesIndexPage: React.FC<ServicesIndexPageProps> = ({ onNavigate
         return <FileText className="w-6 h-6 text-[#C5A059]" />;
       case 'HeartHandshake':
         return <HeartHandshake className="w-6 h-6 text-[#C5A059]" />;
+      case 'Coins':
+        return <Coins className="w-6 h-6 text-[#C5A059]" />;
       case 'ShieldCheck':
       default:
         return <ShieldCheck className="w-6 h-6 text-[#C5A059]" />;

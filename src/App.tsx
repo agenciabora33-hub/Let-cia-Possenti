@@ -10,6 +10,7 @@ import { BioLinkPage } from './pages/BioLinkPage';
 import { ContactPage } from './pages/ContactPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { TermsPage } from './pages/TermsPage';
+import { PensaoAlimenticiaPage } from './pages/PensaoAlimenticiaPage';
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState<string>(() => {
@@ -65,6 +66,10 @@ export default function App() {
 
     if (currentPath === '/servicos') {
       return <ServicesIndexPage onNavigate={handleNavigate} />;
+    }
+
+    if (currentPath === '/pensao-alimenticia' || currentPath === '/servicos/pensao-alimenticia') {
+      return <PensaoAlimenticiaPage onNavigate={handleNavigate} />;
     }
 
     if (currentPath.startsWith('/servicos/')) {

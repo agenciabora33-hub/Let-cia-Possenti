@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { servicesData } from '../data/servicesData';
 import { ArrowLeft, Check, FileCheck, HelpCircle, ArrowRight, MessageCircle, ShieldCheck } from 'lucide-react';
 import { getServiceWhatsAppUrl, getWhatsAppUrl } from '../utils/whatsapp';
@@ -6,11 +6,16 @@ import divorcioImg from '../assets/images/divorcio_partilha_bens_1791555645234.j
 import sucessoesImg from '../assets/images/sucessoes_patrimonio_1791386831317.jpg';
 import guardaImg from '../assets/images/guarda_infancia_protegida_1791555656534.jpg';
 import teaImg from '../assets/images/family_care_specialized_1791386814944.jpg';
+import pensaoImg from '../assets/images/pensao_alimenticia_apoio_1791579205311.jpg';
 
 const SERVICE_HERO_IMAGES: Record<string, { src: string; fallback: string }> = {
   'divorcio-e-partilha': {
     src: divorcioImg,
     fallback: '/images/divorcio_partilha_bens_1791555645234.jpg',
+  },
+  'pensao-alimenticia': {
+    src: pensaoImg,
+    fallback: '/images/pensao_alimenticia_apoio_1791579205311.jpg',
   },
   'inventario-e-sucessoes': {
     src: sucessoesImg,
@@ -33,6 +38,19 @@ interface ServiceDetailPageProps {
 
 export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ slug, onNavigate }) => {
   const service = servicesData.find((s) => s.slug === slug);
+
+  useEffect(() => {
+    if (service) {
+      document.title = `${service.title} em Caxias do Sul | Advogada Letícia Possenti`;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute('content', `${service.shortDescription} Atendimento em Caxias do Sul e Serra Gaúcha.`);
+      }
+    }
+    return () => {
+      document.title = 'Advogada Letícia Possenti | Direito de Família e Sucessões em Caxias do Sul';
+    };
+  }, [service]);
 
   if (!service) {
     return (

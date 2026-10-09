@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { servicesData } from '../data/servicesData';
 import { ServiceItem } from '../types';
-import { Scale, FileText, HeartHandshake, ShieldCheck, ArrowRight, Check, X, ExternalLink } from 'lucide-react';
+import { Scale, FileText, HeartHandshake, ShieldCheck, ArrowRight, Check, X, ExternalLink, Coins } from 'lucide-react';
 import { getServiceWhatsAppUrl } from '../utils/whatsapp';
 
 import divorcioImg from '../assets/images/divorcio_partilha_bens_1791555645234.jpg';
 import sucessoesImg from '../assets/images/sucessoes_patrimonio_1791386831317.jpg';
 import guardaImg from '../assets/images/guarda_infancia_protegida_1791555656534.jpg';
 import teaImg from '../assets/images/family_care_specialized_1791386814944.jpg';
+import pensaoImg from '../assets/images/pensao_alimenticia_apoio_1791579205311.jpg';
 
 interface ServiceVisualMeta {
   src: string;
@@ -22,6 +23,12 @@ const SERVICE_VISUALS: Record<string, ServiceVisualMeta> = {
     fallback: '/images/divorcio_partilha_bens_1791555645234.jpg',
     alt: 'Divórcio consensual e partilha estratégica de patrimônio matrimonial com segurança documental',
     visualTag: 'Partilha Patrimonial & Acordo Justo'
+  },
+  'pensao-alimenticia': {
+    src: pensaoImg,
+    fallback: '/images/pensao_alimenticia_apoio_1791579205311.jpg',
+    alt: 'Pensão alimentícia, fixação de alimentos provisórios, execução sob prisão e revisional em Caxias do Sul',
+    visualTag: 'Fixação, Execução & Revisional'
   },
   'inventario-e-sucessoes': {
     src: sucessoesImg,
@@ -58,6 +65,8 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ onNavigate }) => {
         return <FileText className="w-5 h-5 text-[#C5A059]" />;
       case 'HeartHandshake':
         return <HeartHandshake className="w-5 h-5 text-[#C5A059]" />;
+      case 'Coins':
+        return <Coins className="w-5 h-5 text-[#C5A059]" />;
       case 'ShieldCheck':
       default:
         return <ShieldCheck className="w-5 h-5 text-[#C5A059]" />;

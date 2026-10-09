@@ -65,7 +65,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate }) => {
             <button
               onClick={() => handleNavClick('/servicos')}
               className={`hover:text-[#C5A059] transition-colors pb-0.5 ${
-                currentPath.startsWith('/servicos') ? 'text-[#111827] font-semibold border-b-2 border-[#C5A059]' : ''
+                currentPath.startsWith('/servicos') || currentPath === '/pensao-alimenticia' ? 'text-[#111827] font-semibold border-b-2 border-[#C5A059]' : ''
               }`}
             >
               Áreas de Atuação

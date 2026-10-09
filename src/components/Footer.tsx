@@ -131,6 +131,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <button
+                  onClick={() => onNavigate('/pensao-alimenticia')}
+                  className="hover:text-white transition-colors text-left text-[#C5A059] font-medium"
+                >
+                  Pensão Alimentícia & Execução de Alimentos
+                </button>
+              </li>
+              <li>
+                <button
                   onClick={() => onNavigate('/servicos/inventario-e-sucessoes')}
                   className="hover:text-white transition-colors text-left"
                 >

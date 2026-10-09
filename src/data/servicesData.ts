@@ -118,6 +118,68 @@ export const servicesData: ServiceItem[] = [
     targetAudience: 'Famílias que receberam bens por herança e desejam regularizar a propriedade com agilidade, sem brigas e com custo fiscal otimizado.'
   },
   {
+    id: 'pensao-alimenticia',
+    slug: 'pensao-alimenticia',
+    title: 'Pensão Alimentícia & Revisão',
+    shortDescription: 'Fixação justa de alimentos provisórios, cobrança célere de parcelas em atraso (rito de prisão ou penhora) e revisão fundamentada no binômio necessidade x possibilidade.',
+    badge: 'Direito de Família',
+    iconName: 'Coins',
+    heroHeadline: 'Garantia do sustento digno e proteção financeira justa para quem você mais ama.',
+    longDescription:
+      'A fixação e o pagamento pontual da pensão alimentícia são direitos fundamentais para assegurar a dignidade, a educação e a saúde dos filhos ou ex-cônjuges dependentes. Atuamos com extrema firmeza e sensibilidade tanto para quem precisa fixar ou executar parcelas em atraso (sob rito de prisão civil do art. 528 do CPC ou penhora de contas, veículos e bens) quanto para quem busca revisar o valor devido por alteração comprovada na capacidade financeira. Em Caxias do Sul e em toda a Serra Gaúcha, conduzimos cada caso com estratégia documental minuciosa, desmistificando o mito de percentuais fixos e garantindo a aplicação justa do trinômio necessidade, possibilidade e proporcionalidade.',
+    benefits: [
+      'Pedido de Alimentos Provisórios de Urgência logo no início da ação para não deixar o menor desamparado',
+      'Investigação patrimonial e aplicação da Teoria da Aparência em casos de renda informal ou ocultação de patrimônio',
+      'Ação de Execução de Alimentos sob o Rito de Prisão Civil (art. 528 CPC) ou Penhora de Contas, FGTS e Veículos',
+      'Ação Revisional de Alimentos para adequação do valor quando houver desemprego, nova família ou aumento de despesas',
+      'Ação de Exoneração de Alimentos quando o alimentado atinge a maioridade e adquire autonomia financeira',
+      'Fixação de pensão alimentícia gravídica para custeio de exames e despesas médicas durante a gestação'
+    ],
+    stages: [
+      {
+        step: '01',
+        title: 'Mapeamento de Despesas e Capacidade Financeira',
+        description: 'Levantamento pormenorizado de todas as despesas reais do filho (moradia, educação, alimentação, saúde, lazer) e apuração fidedigna dos rendimentos e padrão de vida do alimentante.'
+      },
+      {
+        step: '02',
+        title: 'Fixação Liminar de Alimentos Provisórios',
+        description: 'Ingresso imediato com a ação na Vara de Família de Caxias do Sul solicitando decisão liminar em 48 a 72 horas para que os pagamentos comecem de pronto, antes mesmo da audiência.'
+      },
+      {
+        step: '03',
+        title: 'Sentença Definitiva e Garantia de Cumprimento',
+        description: 'Acompanhamento até a sentença definitiva ou acordo homologado, expedindo ofício para desconto direto em folha de pagamento ou fixando parâmetros seguros de correção monetária.'
+      }
+    ],
+    documentsRequired: [
+      'Certidão de nascimento do filho ou certidão de casamento',
+      'Comprovantes de despesas regulares (escola, farmácia, plano de saúde, recibos de alimentação, moradia)',
+      'Documento de identidade (RG ou CNH) e comprovante de residência do responsável',
+      'Comprovantes de rendimento do alimentante ou indícios de padrão de vida (redes sociais, faturamento, veículos)',
+      'Dados bancários (conta corrente ou chave PIX) para recebimento dos alimentos'
+    ],
+    faqs: [
+      {
+        question: 'A pensão alimentícia é sempre calculada em 30% do salário?',
+        answer: 'Não! Esse é um dos maiores mitos do Direito de Família. A legislação brasileira não prevê percentual fixo. O juiz arbitra o montante baseado no trinômio: necessidade de quem recebe, possibilidade de quem paga e proporcionalidade entre pai e mãe.'
+      },
+      {
+        question: 'E se o genitor trabalhar sem carteira assinada ou como autônomo?',
+        answer: 'O dever de pagar alimentos não cessa. A pensão pode ser fixada em percentual do salário mínimo nacional ou calculada com base na Teoria da Aparência, avaliando viagens, veículos e sinais exteriores de riqueza nas redes sociais.'
+      },
+      {
+        question: 'Com quantas parcelas em atraso já é possível pedir a prisão do devedor?',
+        answer: 'A partir de apenas UMA parcela em atraso já é cabível o pedido de execução sob rito de prisão civil (artigo 528 do CPC). A lei autoriza a cobrança das 3 últimas parcelas vencidas mais todas as que vencerem ao longo do processo.'
+      },
+      {
+        question: 'A pensão acaba automaticamente quando o filho faz 18 anos?',
+        answer: 'Não. Pela Súmula 358 do STJ, o cancelamento da pensão exige decisão judicial em Ação de Exoneração de Alimentos, permitindo que o filho comprove se ainda necessita (por exemplo, cursando universidade ou curso técnico).'
+      }
+    ],
+    targetAudience: 'Mães, pais e responsáveis em Caxias do Sul e região que buscam garantir o sustento digno e tempestivo de seus filhos ou adequar o valor da pensão com equilíbrio e segurança jurídica.'
+  },
+  {
     id: 'guarda-e-convivencia',
     slug: 'guarda-e-convivencia',
     title: 'Guarda & Convivência Familiar',

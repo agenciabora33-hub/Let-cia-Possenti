@@ -8,7 +8,8 @@ import {
   Globe,
   Sparkles,
   Scale,
-  HeartHandshake
+  HeartHandshake,
+  Coins
 } from 'lucide-react';
 import {
   getWhatsAppUrl,
@@ -236,6 +237,22 @@ export const BioLinkPage: React.FC<BioLinkPageProps> = ({ onNavigate }) => {
               </div>
             </div>
             <span className="text-neutral-400 text-xs">→</span>
+          </button>
+
+          <button
+            onClick={() => onNavigate('/pensao-alimenticia')}
+            className="w-full p-3.5 rounded-xl bg-[#1f2937] hover:bg-[#283548] border border-[#C5A059]/40 text-neutral-100 text-xs font-medium flex items-center justify-between transition-all active:scale-[0.98]"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-neutral-800 flex items-center justify-center text-[#C5A059]">
+                <Coins className="w-4 h-4" />
+              </div>
+              <div className="text-left">
+                <span className="block font-semibold text-[#F4EDE0]">Pensão Alimentícia & Execução</span>
+                <span className="text-[11px] text-[#C5A059]">Fixação urgente, cobrança e revisão no Fórum</span>
+              </div>
+            </div>
+            <span className="text-[#C5A059] text-xs">→</span>
           </button>
 
           <button
