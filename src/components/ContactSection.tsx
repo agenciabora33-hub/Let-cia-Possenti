@@ -14,7 +14,11 @@ import { InstagramIcon, TikTokIcon, FacebookIcon, GoogleMapsPinIcon } from './So
 import { LeadSubmission } from '../types';
 import { trackAdConversion } from '../utils/analytics';
 
-export const ContactSection: React.FC = () => {
+interface ContactSectionProps {
+  onNavigate?: (path: string) => void;
+}
+
+export const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
   const [formData, setFormData] = useState<LeadSubmission>({
     nome: '',
     telefone: '',
@@ -253,9 +257,19 @@ export const ContactSection: React.FC = () => {
                     <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
                     <span>Seus dados são protegidos por sigilo profissional da OAB e LGPD.</span>
                   </div>
-                  <a href="/privacidade" className="text-[#C5A059] hover:underline font-medium">
-                    Política de Privacidade
-                  </a>
+                  {onNavigate ? (
+                    <button
+                      type="button"
+                      onClick={() => onNavigate('/privacidade')}
+                      className="text-[#C5A059] hover:underline font-medium text-left cursor-pointer"
+                    >
+                      Política de Privacidade
+                    </button>
+                  ) : (
+                    <a href="/privacidade" className="text-[#C5A059] hover:underline font-medium">
+                      Política de Privacidade
+                    </a>
+                  )}
                 </div>
               </form>
             )}
@@ -372,7 +386,7 @@ export const ContactSection: React.FC = () => {
                 rel="noopener noreferrer"
                 className="inline-block hover:opacity-90 transition-opacity"
               >
-                <img src="/path/to/google-search-badge.svg" alt="Google Search" className="h-9 w-auto" />
+                <img src="/google-search-badge.svg" alt="Google Search" className="h-9 w-auto" />
               </a>
             </div>
 

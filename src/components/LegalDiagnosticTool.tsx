@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CheckCircle2, ArrowRight, RotateCcw, ShieldCheck, Sparkles, AlertCircle } from 'lucide-react';
 import { getWhatsAppUrl } from '../utils/whatsapp';
+import { trackAdConversion } from '../utils/analytics';
 
 export const LegalDiagnosticTool: React.FC = () => {
   const [category, setCategory] = useState<'inventario' | 'divorcio' | 'tea'>('inventario');
@@ -476,6 +477,7 @@ export const LegalDiagnosticTool: React.FC = () => {
                     href={getWhatsAppUrl(diagnosticResult.whatsappMessage)}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackAdConversion('InitiateTriage', { category: diagnosticResult.category })}
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#111827] hover:bg-[#1f2937] text-white text-xs font-semibold uppercase tracking-wider rounded border border-[#C5A059] shadow-lg transition-all"
                   >
                     <span>Enviar para a Dra. Letícia no WhatsApp</span>

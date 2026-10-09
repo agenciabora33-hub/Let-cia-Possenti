@@ -20,7 +20,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
         </div>
       </div>
 
-      <ContactSection />
+      <ContactSection onNavigate={onNavigate} />
       <FaqAccordion />
     </div>
   );

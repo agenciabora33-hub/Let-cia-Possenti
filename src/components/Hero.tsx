@@ -108,7 +108,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                 <div className="relative aspect-[4/5] sm:aspect-[3/4] bg-neutral-900 overflow-hidden">
                   <img
                     src="https://i.ibb.co/kVdW3dYG/watermarked-img-15853591358428785044.jpg"
-                    alt="watermarked-img-15853591358428785044"
+                    alt="Dra. Letícia Possenti — Advogada Especialista em Direito de Família e Sucessões"
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover object-center filter brightness-[0.98] transition-transform duration-700 hover:scale-105"
                     onError={(e) => {

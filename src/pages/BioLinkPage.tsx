@@ -307,7 +307,7 @@ export const BioLinkPage: React.FC<BioLinkPageProps> = ({ onNavigate }) => {
               rel="noopener noreferrer"
               className="inline-block hover:opacity-90 transition-opacity"
             >
-              <img src="/path/to/google-search-badge.svg" alt="Google Search" className="h-10 w-auto" />
+              <img src="/google-search-badge.svg" alt="Google Search" className="h-10 w-auto" />
             </a>
           </div>
 

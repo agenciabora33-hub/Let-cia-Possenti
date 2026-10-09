@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MessageCircle, X, ChevronRight, ShieldCheck } from 'lucide-react';
 import { getWhatsAppUrl, WHATSAPP_PHONE_DISPLAY } from '../utils/whatsapp';
+import { trackAdConversion } from '../utils/analytics';
 
 export const FloatingWhatsApp: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +16,12 @@ export const FloatingWhatsApp: React.FC = () => {
   }, []);
 
   const handleOpenWhatsApp = (customMessage?: string) => {
-    window.open(getWhatsAppUrl(customMessage), '_blank');
+    trackAdConversion('Contact', { source: 'floating_drawer', message: customMessage });
+    try {
+      window.open(getWhatsAppUrl(customMessage), '_blank', 'noopener,noreferrer');
+    } catch {
+      window.location.href = getWhatsAppUrl(customMessage);
+    }
     setIsOpen(false);
   };
 

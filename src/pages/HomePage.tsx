@@ -20,7 +20,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       <LegalDiagnosticTool />
       <WhyChooseUs />
       <FaqAccordion />
-      <ContactSection />
+      <ContactSection onNavigate={onNavigate} />
     </div>
   );
 };
